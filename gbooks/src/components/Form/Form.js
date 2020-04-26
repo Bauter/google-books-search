@@ -9,7 +9,7 @@ import "./style.css";
 // Define Component "Form"
 //==================================================
 
-function Form() {
+function Form(props) {
     return (
         <div className="card m-4">
 
@@ -19,8 +19,8 @@ function Form() {
 
             <div className="card-body">
                 <div className="form">
-                    <input type="text" name="search" className="form-group" placeholder="Search for a book!" required />
-                    <button className="btn btn-primary form-group">Search</button>
+                    <input type="text" onChange={props.handleInputChange} name="search" className="form-group" placeholder="Search for a book!" required />
+                    <button className="btn btn-primary form-group" onClick={props.handleFormSubmit}>Search</button>
                 </div>
             </div>
              
