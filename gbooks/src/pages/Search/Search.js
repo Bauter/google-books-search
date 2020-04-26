@@ -34,7 +34,7 @@ class Search extends Component {
         // Run function from API.js to search google-books
         API.getBooksFromGoogle(searchTerm)
             .then(res => {
-                console.log(res.items[0].volumeInfo.imageLinks.thumbnail)
+                
                 
                 console.log(this.state.searchTerm)
                 console.log(this.state.books)
@@ -90,12 +90,12 @@ class Search extends Component {
                             ( 
                                 
                                 <BookCard
-                                    image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150" }
+                                    image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "https://via.placeholder.com/150" }
                                     title={book.volumeInfo.title}
                                     author={book.volumeInfo.authors}
                                     summary={book.volumeInfo.description}
                                     handleSaveBtn={this.handleSaveBtn}
-                                    link={book.selfLink}
+                                    link={book.volumeInfo.previewLink}
                                     id={book.id}
                                 />
                             ))}
