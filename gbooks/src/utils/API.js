@@ -17,9 +17,9 @@ export default {
             .then(res => res.data)
             .catch(err => console.log(err))
     },
-    // Gets the book with the given id
-    getSavedBooks: function(id) {
-        return axios.get("/api/books/" + id)
+    // Gets the saved books
+    getSavedBooks: function() {
+        return axios.get("/api/books")
             .then(res => res.data)
             .catch(err => console.log(err))
     },
@@ -38,5 +38,3 @@ export default {
 };
 
 
-//REMOED :
- //get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&=${key}`)

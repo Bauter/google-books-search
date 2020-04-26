@@ -5,7 +5,7 @@
 import React, { Component } from "react";
 import JumboTron from "../../components/Jumbotron/Jumbotron.js";
 import Form from "../../components/Form/Form.js";
-import Results from "../../components/Results/Results.js";
+import Results from "../../components/Results/Results.js"; // remove this
 import Footer from "../../components/Footer/Footer.js";
 import BookCard from "../../components/BookCard/BookCard.js";
 import API from "../../utils/API.js";
@@ -19,6 +19,7 @@ class Search extends Component {
     state= {
         books:[],
         searchTerm: "",
+        btnName: "Save"
         
     }
 
@@ -60,17 +61,29 @@ class Search extends Component {
         this.getBooksFromGoogle(this.state.searchTerm)
     }
 
-    handleSaveBtn(event) {
-        event.preventDefault()
+    handleBtn = (id) => {
+        
+        console.log(id)
+        let bookInfo = this.state.books.filter(book => book.id === id)
         // Run function from API.js
-        API.saveBook()
+        console.log (bookInfo[0])
+        console.log(bookInfo[0].volumeInfo.authors[0])
+
+        let bookObject = {
+            title: bookInfo[0].volumeInfo.title,
+            author: bookInfo[0].volumeInfo.authors[0],
+            description: bookInfo[0].volumeInfo.description,
+            image: bookInfo[0].volumeInfo.imageLinks ?  bookInfo[0].volumeInfo.imageLinks.smallThumbnail : "https://via.placeholder.com/150",
+            link: bookInfo[0].volumeInfo.previewLink
+        }
+        API.saveBook(bookObject)
             .then(res =>
-             alert(`book: ${res} has been saved to DB`)   
+             alert(`book: ${res.data} has been saved to DB`)   
             )
     }
 
 
-    thumbnail
+    
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Render
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -94,14 +107,19 @@ class Search extends Component {
                                     title={book.volumeInfo.title}
                                     author={book.volumeInfo.authors}
                                     summary={book.volumeInfo.description}
-                                    handleSaveBtn={this.handleSaveBtn}
+                                    handleBtn={() => {this.handleBtn(book.id)}}
                                     link={book.volumeInfo.previewLink}
                                     id={book.id}
+                                    btnName={this.state.btnName}
                                 />
                             ))}
                         </div>
                         ) : 
-                            ( <h3>No results found. Try searching for a new book!</h3>)    
+                            (
+                                <div className="card m-4">
+                                    <h3>No results found. Try searching for a new book!</h3>
+                                </div>
+                            )    
                         } 
                     <Footer />
               

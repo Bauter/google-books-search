@@ -33,9 +33,9 @@ const BookCard = function(props) {
                         {/* Book Summary */}
                         <p className="card-text">Summary: {props.summary}</p>
                         {/* Save book to DB button */}
-                        <button className="btn btn-info" onClick={() => {props.handleSaveBtn(props.id)}}>Save</button>
+                        <button className="btn btn-info" onClick={ () =>{props.handleBtn()}}>{props.btnName}</button>
                         {/* Link toi view book */}
-                        <a href={props.link} className="btn btn-primary">View</a>
+                        <a href={props.link} className="btn btn-primary float-right">View</a>
 
                     </div>
                 </div>

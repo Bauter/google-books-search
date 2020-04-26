@@ -30,4 +30,3 @@ function Form(props) {
 
 export default Form;
 
-// make a class or keep as a defined component??? proably go with props since its tied into the search Component
