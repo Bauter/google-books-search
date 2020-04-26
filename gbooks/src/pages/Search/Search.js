@@ -16,20 +16,24 @@ import API from "../../utils/API.js";
 
 class Search extends Component {
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // State
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     state= {
         books:[],
         searchTerm: "",
-        btnName: "Save"
-        
+        btnName: "Save",
+        title: "G-Books",
+        description: "Enter a book to search for below!",
+        headerMessage:  ""
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Component methods
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    // componentDidMount () {
-
-    // }
+    // Get Books from Google-books-api
 
     getBooksFromGoogle = (searchTerm) => {
         // Run function from API.js to search google-books
@@ -37,14 +41,14 @@ class Search extends Component {
             .then(res => {
                 
                 
-                console.log(this.state.searchTerm)
-                console.log(this.state.books)
+                
     
-                this.setState({ books: res.items })
-                console.log("after setState")
-                console.log(this.state.books)
+                this.setState({ books: res.items, headerMessage: "Click 'View' to view on 'Google-Books' and 'Save' to add a book to 'Saved Books' page" })
+                
             });
     }
+
+    // Handle form input change
 
     handleInputChange = event => {
         // Assign the search change in input to a variable.
@@ -55,11 +59,16 @@ class Search extends Component {
        ;
     }
 
+    // Handle form submit button
+
     handleFormSubmit = event => {
         event.preventDefault();
         // Call function "getBooksFromGoogle" with argument of "searchTerm" 
         this.getBooksFromGoogle(this.state.searchTerm)
+        this.setState({searchTerm:""})
     }
+
+    // Handle button event
 
     handleBtn = (id) => {
         
@@ -81,8 +90,6 @@ class Search extends Component {
              alert(`book: ${res.data} has been saved to DB`)   
             )
     }
-
-
     
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Render
@@ -91,36 +98,43 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <JumboTron />
+                <JumboTron 
+                    title={this.state.title}
+                    pageDescription={this.state.description}
+                    message={this.state.headerMessage}
+                />
                     <Form 
                         handleInputChange={this.handleInputChange}
                         handleFormSubmit={this.handleFormSubmit}
                     />
-                    
+                    <div className="container m-4">
+                        
                         {this.state.books.length ? (
-                        <div>
-                            {this.state.books.map(book => 
-                            ( 
-                                
-                                <BookCard
-                                    image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "https://via.placeholder.com/150" }
-                                    title={book.volumeInfo.title}
-                                    author={book.volumeInfo.authors}
-                                    summary={book.volumeInfo.description}
-                                    handleBtn={() => {this.handleBtn(book.id)}}
-                                    link={book.volumeInfo.previewLink}
-                                    id={book.id}
-                                    btnName={this.state.btnName}
-                                />
-                            ))}
-                        </div>
-                        ) : 
-                            (
-                                <div className="card m-4">
-                                    <h3>No results found. Try searching for a new book!</h3>
-                                </div>
-                            )    
-                        } 
+                            
+                            <div>
+                                {this.state.books.map(book => 
+                                ( 
+                                    
+                                    <BookCard
+                                        image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "https://via.placeholder.com/150" }
+                                        title={book.volumeInfo.title}
+                                        author={book.volumeInfo.authors}
+                                        summary={book.volumeInfo.description}
+                                        handleBtn={() => {this.handleBtn(book.id)}}
+                                        link={book.volumeInfo.previewLink}
+                                        id={book.id}
+                                        btnName={this.state.btnName}
+                                    />
+                                ))}
+                            </div>
+                        ) 
+                        : 
+                        (
+                            <div className="card m-4">
+                                <h3 className="text-center">Try searching for a new book!</h3>
+                            </div>
+                        )} 
+                    </div>   
                     <Footer />
               
             </div>

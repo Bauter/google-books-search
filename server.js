@@ -24,10 +24,7 @@ app.use(express.json());
 app.use("/api", apiRoutes);
 
 app.use((req, res, next) => {
-
     res.send("Welcome to Express");
-
-
 });
 
 //=====================================================
@@ -41,7 +38,5 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", {
 //=====================================================
 
 app.listen(PORT, () => {
-
     console.log(`Server running on port ${PORT}`);
-
 });

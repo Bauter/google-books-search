@@ -17,7 +17,10 @@ class Saved extends Component {
 
     state= {
         savedBooks: [],
-        btnName:"Delete"
+        btnName:"Delete",
+        title: "G-Books",
+        description: "",
+        headerMessage: ""
     }
 
     componentDidMount () {
@@ -25,10 +28,10 @@ class Saved extends Component {
             .then(res => {
                 console.log(res)
                 if(!res) {
-                    alert("no saved books at this time!")
+                    this.setState({ pageDescription: "Once you save some books, they will appear here" })
                 } else {
                     console.log(res)
-                    this.setState({savedBooks: res})
+                    this.setState({ savedBooks: res, description: "Here are your saved books!", headerMessage: "Click 'View' to view on 'Google-Books' and 'Delete' to remove a saved book!" })
                 }
             })
     }
@@ -44,32 +47,39 @@ class Saved extends Component {
     render() {
         return (
             <div>
-                <JumboTron />
-                    {this.state.savedBooks.length ? (
-                    <div>
-                        {this.state.savedBooks.map(book => 
-                        ( 
-                            
-                            <BookCard
-                                image={book.image}
-                                title={book.title}
-                                author={book.author}
-                                summary={book.description}
-                                handleBtn={() => {this.handleBtn(book._id)}}
-                                link={book.link}
-                                id={book._id}
-                                btnName={this.state.btnName}
-                            />
-                        ))}
-                    </div>
-                ) : 
+                <JumboTron
+                    title={this.state.title}
+                    pageDescription={this.state.description}
+                    message={this.state.headerMessage}                
+                />
+                
+                    <div className="container m-4">
+                        {this.state.savedBooks.length ? (
+                        <div>
+                            {this.state.savedBooks.map(book => 
+                            ( 
+                                
+                                <BookCard
+                                    image={book.image}
+                                    title={book.title}
+                                    author={book.author}
+                                    summary={book.description}
+                                    handleBtn={() => {this.handleBtn(book._id)}}
+                                    link={book.link}
+                                    id={book._id}
+                                    btnName={this.state.btnName}
+                                />
+                            ))}
+                        </div>
+                    ) 
+                    : 
                     ( 
                         <div className="card m-4">
-                            <h3>No saved books found</h3>   
+                            <h3 className="text-center">No saved books found</h3>   
                         </div>
-                    )
-                }   
-                    
+                    )}  
+                </div> 
+                 
                 <Footer />
             </div>
         )

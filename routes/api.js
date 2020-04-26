@@ -12,7 +12,7 @@ const Book = require("../models/book.js")
 
 // Create Book
 router.post("/books", (req, res) => {
-    console.log("Hit the post route")
+    console.log("Hit the POST route")
     console.log(req.body.title)
     Book.create(req.body)
         .then(data => res.json(data))
@@ -23,6 +23,7 @@ router.post("/books", (req, res) => {
 
 // Find all saved books
 router.get("/books", (req, res) => {
+    console.log("hit the GET route")
     Book.find({})
         .then(data => res.json(data))
         .catch(err => res.json(err))
@@ -30,6 +31,7 @@ router.get("/books", (req, res) => {
 
 // Delete saved book
 router.delete("/books/:id", (req, res) => {
+    console.log("Hit the DELETE route")
     Book.findOneAndDelete({"id": req.param.id})
         .then(data => res.json(data))
         .catch(err => res.json(err))

@@ -19,8 +19,8 @@ function Form(props) {
 
             <div className="card-body">
                 <div className="form">
-                    <input type="text" onChange={props.handleInputChange} name="search" className="form-group" placeholder="Search for a book!" required />
-                    <button className="btn btn-primary form-group" onClick={props.handleFormSubmit}>Search</button>
+                    <input type="text" onChange={props.handleInputChange} name="search" className="form pb-1" placeholder="Search for a book!" required />
+                    <button className="btn btn-primary form ml-2" onClick={props.handleFormSubmit}>Search</button>
                 </div>
             </div>
              
