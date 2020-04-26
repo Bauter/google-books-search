@@ -5,7 +5,6 @@
 import React, { Component } from "react";
 import JumboTron from "../../components/Jumbotron/Jumbotron.js";
 import Form from "../../components/Form/Form.js";
-import Results from "../../components/Results/Results.js"; // remove this
 import Footer from "../../components/Footer/Footer.js";
 import BookCard from "../../components/BookCard/BookCard.js";
 import API from "../../utils/API.js";
@@ -36,13 +35,11 @@ class Search extends Component {
     // Get Books from Google-books-api
 
     getBooksFromGoogle = (searchTerm) => {
-        // Run function from API.js to search google-books
+        // Run function from API.js to search google-books.
         API.getBooksFromGoogle(searchTerm)
             .then(res => {
                 
-                
-                
-    
+                // Take the response from Google Api search and use it to setState "books" array.
                 this.setState({ books: res.items, headerMessage: "Click 'View' to view on 'Google-Books' and 'Save' to add a book to 'Saved Books' page" })
                 
             });
@@ -63,8 +60,9 @@ class Search extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        // Call function "getBooksFromGoogle" with argument of "searchTerm" 
+        // Call function "getBooksFromGoogle" with argument of "searchTerm" .
         this.getBooksFromGoogle(this.state.searchTerm)
+        // Reset this.state.searchTerms after function.
         this.setState({searchTerm:""})
     }
 
@@ -73,11 +71,10 @@ class Search extends Component {
     handleBtn = (id) => {
         
         console.log(id)
+        // Grab specific book from "books" array by filtering by id and define with variable.
         let bookInfo = this.state.books.filter(book => book.id === id)
-        // Run function from API.js
-        console.log (bookInfo[0])
-        console.log(bookInfo[0].volumeInfo.authors[0])
-
+        
+        // Define "bookObject" with data from specific book ("bookInfo").
         let bookObject = {
             title: bookInfo[0].volumeInfo.title,
             author: bookInfo[0].volumeInfo.authors[0],
@@ -85,15 +82,17 @@ class Search extends Component {
             image: bookInfo[0].volumeInfo.imageLinks ?  bookInfo[0].volumeInfo.imageLinks.smallThumbnail : "https://via.placeholder.com/150",
             link: bookInfo[0].volumeInfo.previewLink
         }
+
+        // Run function from API.js. passing "bookObject" as argument.
         API.saveBook(bookObject)
             .then(res =>
              alert(`book: ${res.data} has been saved to DB`)   
             )
     }
     
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Render
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Render (Use ternary operator to determine what will display in "container" div)
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     render() {
         return (

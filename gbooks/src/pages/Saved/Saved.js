@@ -4,7 +4,6 @@
 
 import React, { Component } from "react";
 import JumboTron from "../../components/Jumbotron/Jumbotron.js";
-import Results from "../../components/Results/Results.js";
 import Footer from "../../components/Footer/Footer.js";
 import BookCard from "../../components/BookCard/BookCard.js";
 import API from "../../utils/API.js";
@@ -15,6 +14,10 @@ import API from "../../utils/API.js";
 
 class Saved extends Component {
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // State
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     state= {
         savedBooks: [],
         btnName:"Delete",
@@ -23,26 +26,43 @@ class Saved extends Component {
         headerMessage: ""
     }
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Component methods
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    // Get books from dataBase and setState: savedBooks , or display alt "description".
     componentDidMount () {
+        // Use API function "getSavedBooks" to return saved books from DB.
         API.getSavedBooks()
             .then(res => {
                 console.log(res)
                 if(!res) {
-                    this.setState({ pageDescription: "Once you save some books, they will appear here" })
+                    // If no response, display the appropriate description by changing state.
+                    this.setState({ description: "Once you save some books, they will appear here" })
                 } else {
                     console.log(res)
+                    // If response, setState.
                     this.setState({ savedBooks: res, description: "Here are your saved books!", headerMessage: "Click 'View' to view on 'Google-Books' and 'Delete' to remove a saved book!" })
                 }
             })
     }
 
+    // Handle button event
+
     handleBtn (id) {
+        // Use API function "deleteBook" to delete book from DB.
         API.deleteBook(id)
             .then(res => {
-                alert("Book deleted!")
+                // Inform the user ther book has been deleted.
+                alert("Book deleted!");
+                // Call "componentDidMount" to refresh savedBooks displayed after delete.
                 this.componentDidMount()
             })
     }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Render (Use ternary operator to determine what will display in "container" div)
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     render() {
         return (
