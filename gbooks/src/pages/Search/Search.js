@@ -92,7 +92,7 @@ class Search extends Component {
         // Run function from API.js. passing "bookObject" as argument.
         API.saveBook(bookObject)
             .then(res =>
-             alert(`book: ${res.data} has been saved to DB`)   
+             alert(`this book has been saved to 'Saved Books' page`)   
             )
     }
     
