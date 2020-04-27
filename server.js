@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 // Connect to the Mongo DB
 //=====================================================
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://<dbuser>:<dbpassword>@ds339458.mlab.com:39458/heroku_bjz8p88c", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://user:SyaTqxPgQUdY$#8@ds339458.mlab.com:39458/heroku_bjz8p88c", { useNewUrlParser: true });
 
 //=====================================================
 // Start the server
