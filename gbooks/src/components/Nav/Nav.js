@@ -13,10 +13,10 @@ import {Link} from "react-router-dom";
 function Nav() {
     return (
         <nav className="navbar sticky-top m-2">
-            <div className="col">
-                <h3>Gbooks</h3>
+            <div className="col-2 gbooks">
+                <h3>G-books</h3>
             </div>
-            <div className="col">
+            <div className="col-10">
             <ul className="nav float-right">
                 <li className="nav-item">
                     <Link to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}>

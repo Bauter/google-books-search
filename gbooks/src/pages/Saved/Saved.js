@@ -7,6 +7,7 @@ import JumboTron from "../../components/Jumbotron/Jumbotron.js";
 import Footer from "../../components/Footer/Footer.js";
 import BookCard from "../../components/BookCard/BookCard.js";
 import API from "../../utils/API.js";
+import "./style.css";
 
 //==================================================
 // Define Component "Saved"
@@ -73,9 +74,10 @@ class Saved extends Component {
                     message={this.state.headerMessage}                
                 />
                 
-                    <div className="container m-4">
+                    
                         {this.state.savedBooks.length ? (
-                        <div>
+
+                        <div className="card justify-content-center results border border-success m-4">
                             {this.state.savedBooks.map(book => 
                             ( 
                                 
@@ -94,11 +96,11 @@ class Saved extends Component {
                     ) 
                     : 
                     ( 
-                        <div className="card m-4">
+                        <div className="card justify-content-center noResults border border-danger m-4" style={{width: "100%"}}>
                             <h3 className="text-center">No saved books found</h3>   
                         </div>
                     )}  
-                </div> 
+                
                  
                 <Footer />
             </div>

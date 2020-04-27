@@ -2,3 +2,9 @@
     background-color: lightgray;
     border-bottom: 5px solid gray;
 }
+.gbooks {
+    font-weight: bold;
+    font-style: oblique;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+   
+  }

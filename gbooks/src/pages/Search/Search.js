@@ -8,6 +8,7 @@ import Form from "../../components/Form/Form.js";
 import Footer from "../../components/Footer/Footer.js";
 import BookCard from "../../components/BookCard/BookCard.js";
 import API from "../../utils/API.js";
+import "./style.css";
 
 //==================================================
 // Define Component "Search"
@@ -52,18 +53,23 @@ class Search extends Component {
         const formInput = event.target.value;
         // Set the this.state.searchTerm to value of formInput.
         this.setState({ searchTerm: formInput })
-
-       ;
+        
+        
     }
 
     // Handle form submit button
 
     handleFormSubmit = event => {
         event.preventDefault();
-        // Call function "getBooksFromGoogle" with argument of "searchTerm" .
-        this.getBooksFromGoogle(this.state.searchTerm)
-        // Reset this.state.searchTerms after function.
-        this.setState({searchTerm:""})
+        // Call function "getBooksFromGoogle" with argument of "searchTerm" after validation .
+        if (this.state.searchTerm === "") {
+            alert("please enter something to search")
+        } else {
+            this.getBooksFromGoogle(this.state.searchTerm)
+            // Reset this.state.searchTerms after function.
+            this.setState({searchTerm:""})
+        }
+        
     }
 
     // Handle button event
@@ -106,11 +112,11 @@ class Search extends Component {
                         handleInputChange={this.handleInputChange}
                         handleFormSubmit={this.handleFormSubmit}
                     />
-                    <div className="container m-4">
+                    
                         
                         {this.state.books.length ? (
                             
-                            <div>
+                            <div className="card justify-content-center results border border-success m-4">
                                 {this.state.books.map(book => 
                                 ( 
                                     
@@ -129,11 +135,11 @@ class Search extends Component {
                         ) 
                         : 
                         (
-                            <div className="card m-4">
-                                <h3 className="text-center">Try searching for a new book!</h3>
+                            <div className="card justify-content-center noResults border border-danger m-4" >
+                                <h3 className="text-center ">Try searching for a new book!</h3>
                             </div>
                         )} 
-                    </div>   
+                     
                     <Footer />
               
             </div>

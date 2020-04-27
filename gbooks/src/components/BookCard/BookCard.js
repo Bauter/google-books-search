@@ -12,13 +12,13 @@ import React from "react";
 const BookCard = function(props) {
     return (
         
-        <div className="card m-4 rounded"  key={props.id}>
-            <div className="row no-gutters">
+        <div className="card m-4 rounded justify-content-center bg-light"  key={props.id}>
+            <div className="row no-gutters justify-content-center">
 
                 <div className="col-md-4">
                     
                     {/* Book image/thumbnail */}
-                    <img src={props.image} className="card-img rounded" alt={props.title}/>
+                    <img src={props.image} className="card-img rounded m-2" alt={props.title}/>
 
                 </div>
 

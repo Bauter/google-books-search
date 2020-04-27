@@ -11,7 +11,7 @@ import "./style.css";
 
 function Jumbotron(props) {
     return (
-        <div className="jumbotron m-4">
+        <div className="jumbotron m-2">
 
             <h1 className="text-center mb-4">{props.title}</h1>
             <h3 className="text-center">{props.pageDescription}</h3>

@@ -11,7 +11,7 @@ import "./style.css";
 
 function Footer() {
     return (
-        <div className="foot card-header m-2 rounded gradient-border row">
+        <div className="foot card-header m-2 mt-4 rounded gradient-border row">
 
             <div className="col-4 text-left">
                 <a href="https://github.com/Bauter" target="_blank" rel="noopener noreferrer" className="btn btn-dark footer-link">Bauter</a>

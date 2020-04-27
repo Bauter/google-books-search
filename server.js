@@ -12,10 +12,10 @@ const PORT = process.env.PORT || 5000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("gbooks/build"));
-// }
+//Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("gbooks/build"));
+}
 
 //=====================================================
 // Routes
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 // Connect to the Mongo DB
 //=====================================================
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://<dbuser>:<dbpassword>@ds339458.mlab.com:39458/heroku_bjz8p88c", { useNewUrlParser: true });
 
 //=====================================================
 // Start the server
