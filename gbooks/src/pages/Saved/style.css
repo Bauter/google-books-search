@@ -1,0 +1,9 @@
+.card.noResults {
+    background-color:lightgray;
+    border-width: 4px !important;
+}
+
+.card.results {
+    background-color:lightgray;
+    border-width: 4px !important;
+}

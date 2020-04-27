@@ -32,6 +32,8 @@ app.use((req, res, next) => {
 //=====================================================
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://user:SyaTqxPgQUdY$#8@ds339458.mlab.com:39458/heroku_bjz8p88c", { useNewUrlParser: true });
+// PRODUCTION: mongodb://user:SyaTqxPgQUdY$#8@ds339458.mlab.com:39458/heroku_bjz8p88c
+// DEV: mongodb://localhost/googlebooks
 
 //=====================================================
 // Start the server
