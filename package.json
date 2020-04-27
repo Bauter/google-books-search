@@ -27,11 +27,12 @@
   },
   "homepage": "https://github.com/Bauter/google-books-search#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "if-env": "^1.0.4",
     "mongoose": "^5.9.10",
+    "node": "^14.0.0",
     "path": "^0.12.7"
   }
 }
